@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendering Progress</title>
+    <script>
+        function checkProgress() {
+            fetch('/progress')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'done') {
+                        window.location.href = '/download';
+                    } else {
+                        setTimeout(checkProgress, 2000); // Poll every 2 seconds
+                    }
+                });
+        }
+
+        window.onload = function() {
+            checkProgress();
+        }
+    </script>
+</head>
+<body>
+    <h1>Rendering in Progress</h1>
+    <p>Your video is being rendered. Please wait...</p>
+    <div class="loader"></div> <!-- Optional: Add spinner or progress animation -->
+</body>
+</html>

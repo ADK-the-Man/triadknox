@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Logo Text</title>
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('form').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <h1>Update Logo Text</h1>
+    <form id="form" action="/submit" method="POST" onsubmit="showLoading()">
+        <label for="new_text">Enter new text for the logo:</label>
+        <input type="text" id="new_text" name="new_text" required>
+        <button type="submit">Update and Render</button>
+    </form>
+
+    <div id="loading" style="display:none;">
+        <h2>Rendering in progress...</h2>
+        <p>Please wait while we process your video.</p>
+        <div class="loader"></div> <!-- Optional: Add a CSS spinner here -->
+    </div>
+
+    <style>
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>
