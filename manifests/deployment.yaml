@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: triadknox-blend-deployment
+  labels:
+    app: triadknox-blend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: triadknox-blend
+  template:
+    metadata:
+      labels:
+        app: triadknox-blend
+    spec:
+      containers:
+      - name: triadknox-blend
+        image: MyACR.azurecr.io/triadknox-blend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: OUTPUT_DIR
+          value: "/app/output"
+        volumeMounts:
+        - name: blender-output-volume
+          mountPath: "/app/output"  # This is where rendered files will be saved
+      volumes:
+      - name: blender-output-volume
+        persistentVolumeClaim:
+          claimName: blender-output-pvc  # Mount the PVC here
